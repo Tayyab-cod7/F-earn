@@ -95,21 +95,20 @@ const Login = () => {
   return (
     <Box
       sx={{
-        height: '100vh',
+        minHeight: '100vh',
         width: '100vw',
         background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         p: 0,
-        overflow: 'hidden'
       }}
     >
-      <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
         <Paper
           elevation={8}
           sx={{
-            p: { xs: 1.5, sm: 2.5 },
+            p: { xs: 2, sm: 4, md: 6 },
             width: { xs: '95vw', sm: '400px', md: '400px' },
             maxWidth: '98vw',
             borderRadius: 5,
@@ -117,22 +116,23 @@ const Login = () => {
             backdropFilter: 'blur(16px)',
             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
             border: '1px solid rgba(255,255,255,0.08)',
+            mt: { xs: 2, sm: 4 },
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 1 }}>
-            <AccountBalanceWalletIcon sx={{ fontSize: { xs: 40, sm: 48 }, color: 'primary.main', mb: 0.5 }} />
-            <Typography component="h1" variant="h4" sx={{ fontWeight: 700, mb: 0.5, fontSize: { xs: '1.3rem', sm: '1.5rem' } }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
+            <AccountBalanceWalletIcon sx={{ fontSize: { xs: 48, sm: 60 }, color: 'primary.main', mb: 1 }} />
+            <Typography component="h1" variant="h4" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: '1.5rem', sm: '2rem' } }}>
               Login to F-EARN
             </Typography>
           </Box>
           {error && (
-            <Alert severity="error" sx={{ mb: 1, py: 0.5 }}>
+            <Alert severity="error" sx={{ mb: 2 }}>
               {error}
             </Alert>
           )}
           <form onSubmit={handleSubmit}>
             <TextField
-              margin="dense"
+              margin="normal"
               required
               fullWidth
               id="identifier"
@@ -142,11 +142,11 @@ const Login = () => {
               autoFocus
               value={formData.identifier}
               onChange={handleChange}
-              sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <TextField
-              margin="dense"
+              margin="normal"
               required
               fullWidth
               name="password"
@@ -179,7 +179,7 @@ const Login = () => {
                 ),
                 style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
               }}
-              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 3, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <Button
@@ -188,10 +188,10 @@ const Login = () => {
               variant="contained"
               size="large"
               sx={{
-                mb: 1.5,
-                py: 1,
+                mb: 2,
+                py: 1.5,
                 fontWeight: 700,
-                fontSize: { xs: '0.9rem', sm: '1rem' },
+                fontSize: { xs: '1rem', sm: '1.1rem' },
                 background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
                 color: '#222',
                 boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
@@ -205,7 +205,7 @@ const Login = () => {
             >
               Login
             </Button>
-            <Box sx={{ textAlign: 'center' }}>
+            <Box sx={{ textAlign: 'center', mt: 1 }}>
               <Link to="/register" style={{ textDecoration: 'none' }}>
                 <Typography variant="body2" color="primary" sx={{ fontWeight: 600 }}>
                   Don't have an account? Register
