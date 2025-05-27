@@ -12,7 +12,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow frontend to access
+  origin: ['http://localhost:3000', 'https://perpetual-possibility-production.up.railway.app'],
   credentials: true
 }));
 app.use(express.json());

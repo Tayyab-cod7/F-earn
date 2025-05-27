@@ -15,8 +15,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
-
-const API_BASE_URL = process.env.REACT_APP_BACKEND_API_URL || 'http://localhost:5000'; // Default to localhost in development
+import config from '../../config';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -71,7 +70,7 @@ const Login = () => {
       return;
     }
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
+      const response = await axios.post(`${config.API_URL}/api/auth/login`, formData);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));

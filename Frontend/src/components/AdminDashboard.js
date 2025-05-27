@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 const ADMIN_PHONE = '03151251123';
 
@@ -10,7 +11,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = () => {
     setLoading(true);
-    axios.get('http://localhost:5000/api/auth/all-users')
+    axios.get(`${config.API_URL}/api/auth/all-users`)
       .then(res => {
         setUsers(res.data);
         setLoading(false);
@@ -26,7 +27,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
     setDeleting(true);
     try {
-      await axios.delete(`http://localhost:5000/api/auth/user/${id}`);
+      await axios.delete(`${config.API_URL}/api/auth/user/${id}`);
       setUsers(users.filter(user => user._id !== id));
     } catch (err) {
       alert(err.response?.data?.message || 'Error deleting user');
@@ -38,7 +39,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete ALL users except admin?')) return;
     setDeleting(true);
     try {
-      await axios.delete('http://localhost:5000/api/auth/users');
+      await axios.delete(`${config.API_URL}/api/auth/users`);
       setUsers(users.filter(user => user.phoneNumber === ADMIN_PHONE));
     } catch (err) {
       alert(err.response?.data?.message || 'Error deleting users');

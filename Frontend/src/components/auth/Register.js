@@ -15,6 +15,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
+import config from '../../config';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -147,7 +148,7 @@ const Register = () => {
 
     try {
       const registerData = formData;
-      const response = await axios.post('http://localhost:5000/api/auth/register', registerData);
+      const response = await axios.post(`${config.API_URL}/api/auth/register`, registerData);
       
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
