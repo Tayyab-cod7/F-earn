@@ -1,9 +1,13 @@
 import React from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, IconButton } from '@mui/material';
+import { Box, Typography, Container, Grid, Card, CardContent } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+// Import icons for carousel navigation
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
