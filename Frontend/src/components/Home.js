@@ -4,6 +4,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+// Import icons for Recharge and Withdraw
+// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'; // Removed icon import
+// import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'; // Removed icon import
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'; // Import wallet icon
+import SavingsIcon from '@mui/icons-material/Savings'; // Import savings icon for Withdraw
 // Import icons for carousel navigation
 // import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'; // Remove unused icons
 // import ChevronRightIcon from '@mui/icons-material/ChevronRight'; // Remove unused icons
@@ -92,14 +97,52 @@ const Home = () => {
         </Swiper>
       </Box>
 
-      {/* Rest of the content within a padded container */}
-      <Container maxWidth="lg" sx={{
-        p: 3, // Apply padding to the main content area
-      }}>
+      {/* Recharge and Withdraw Options */}
+      <Container maxWidth="lg" sx={{ p: 3, pt: 0 }}> {/* Added padding to the container, removed top padding to bring content closer to carousel */}
+        <Grid container spacing={3} sx={{ mb: 4 }}> {/* Added margin bottom */}
+          <Grid item xs={12} sm={6}> {/* Full width on extra small, half width on small and up */}
+            <Card sx={{
+              background: 'rgba(40, 40, 40, 0.9)',
+              borderRadius: 3,
+              boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.3)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              textAlign: 'center',
+              cursor: 'pointer',
+              '&:hover': { background: 'rgba(50, 50, 50, 0.95)' },
+            }}>
+              <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}> {/* Flex container for horizontal layout */}
+                <Typography variant="h6" sx={{ color: '#00ff88' }}>
+                  Recharge
+                </Typography>
+                <AccountBalanceWalletIcon sx={{ fontSize: 50, color: '#00ff88' }} /> {/* Replaced image with Material UI icon */}
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6}> {/* Full width on extra small, half width on small and up */}
+             <Card sx={{
+              background: 'rgba(40, 40, 40, 0.9)',
+              borderRadius: 3,
+              boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.3)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              textAlign: 'center',
+              cursor: 'pointer',
+              '&:hover': { background: 'rgba(50, 50, 50, 0.95)' },
+            }}>
+              <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}> {/* Flex container for horizontal layout */}
+                <Typography variant="h6" sx={{ color: '#ff4081' }}>
+                  Withdraw
+                </Typography>
+                <SavingsIcon sx={{ fontSize: 50, color: '#ff4081' }} /> {/* Replaced image with Material UI icon */}
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+
+        {/* Rest of the content within a padded container */}
         <Typography variant="h4" gutterBottom sx={{ color: '#00ff88', fontWeight: 700, mb: 4, textAlign: 'center' }}>
           Welcome Home!
         </Typography>
-        
+
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Card sx={{
