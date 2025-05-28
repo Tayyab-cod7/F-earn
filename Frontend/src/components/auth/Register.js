@@ -180,7 +180,7 @@ const Register = () => {
         <Paper
           elevation={8}
           sx={{
-            p: { xs: 2, sm: 3, md: 3 },
+            p: { xs: 2, sm: 3, md: 4 },
             width: { xs: '90vw', sm: '340px', md: '340px' },
             maxWidth: '95vw',
             borderRadius: 5,
@@ -220,7 +220,7 @@ const Register = () => {
                 maxLength: 8,
                 pattern: '[a-zA-Z0-9]*'
               }}
-              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <TextField
@@ -240,7 +240,7 @@ const Register = () => {
                 pattern: '[0-9]*',
                 inputMode: 'numeric'
               }}
-              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <TextField
@@ -256,7 +256,7 @@ const Register = () => {
               error={!!emailError}
               helperText={emailError || "Please use your Gmail address"}
               placeholder="example@gmail.com"
-              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <TextField
@@ -293,7 +293,7 @@ const Register = () => {
                 ),
                 style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
               }}
-              sx={{ mb: 3, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <Button
@@ -302,7 +302,7 @@ const Register = () => {
               variant="contained"
               size="large"
               sx={{
-                mb: 2,
+                mb: 1.5,
                 py: 1.5,
                 fontWeight: 700,
                 fontSize: { xs: '1rem', sm: '1.1rem' },

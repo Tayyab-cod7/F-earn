@@ -109,7 +109,7 @@ const Login = () => {
         <Paper
           elevation={8}
           sx={{
-            p: { xs: 2, sm: 4, md: 6 },
+            p: { xs: 2, sm: 3, md: 4 },
             width: { xs: '95vw', sm: '400px', md: '400px' },
             maxWidth: '98vw',
             borderRadius: 5,
@@ -143,7 +143,7 @@ const Login = () => {
               autoFocus
               value={formData.identifier}
               onChange={handleChange}
-              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <TextField
@@ -180,7 +180,7 @@ const Login = () => {
                 ),
                 style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
               }}
-              sx={{ mb: 3, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
             />
             <Button
@@ -189,7 +189,7 @@ const Login = () => {
               variant="contained"
               size="large"
               sx={{
-                mb: 2,
+                mb: 1.5,
                 py: 1.5,
                 fontWeight: 700,
                 fontSize: { xs: '1rem', sm: '1.1rem' },
