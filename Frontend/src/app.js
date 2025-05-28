@@ -11,6 +11,7 @@ import Task from './components/Task';
 import Team from './components/Team';
 import VIP from './components/VIP';
 import Me from './components/Me';
+import { Box } from '@mui/material';
 
 // Create theme
 const theme = createTheme({
@@ -134,4 +135,4 @@ function App() {
 }
 
 // Removed duplicate default export
-// export default App; 
+export default App; 
