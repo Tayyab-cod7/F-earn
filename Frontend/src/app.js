@@ -12,6 +12,8 @@ import Team from './components/Team';
 import VIP from './components/VIP';
 import Me from './components/Me';
 import TermsAndConditions from './components/TermsAndConditions';
+import Recharge from './components/Recharge';
+import Withdraw from './components/Withdraw';
 import { Box } from '@mui/material';
 
 // Create theme
@@ -116,6 +118,14 @@ const router = createBrowserRouter([
       {
         path: 'admin-dashboard',
         element: <AdminDashboard />,
+      },
+      {
+        path: 'recharge',
+        element: <Recharge />,
+      },
+      {
+        path: 'withdraw',
+        element: <Withdraw />,
       },
     ],
   },

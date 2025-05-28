@@ -24,8 +24,11 @@ import 'swiper/css/navigation'; // Import navigation styles
 
 // import required modules
 import { Navigation } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Home = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   // Remove ref and custom scrolling logic
   // const carouselRef = React.useRef(null);
   // const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -51,6 +54,10 @@ const Home = () => {
   //     setCurrentIndex(nextIndex);
   //   }
   // };
+
+  const handleNavigation = (path) => () => { // Handle navigation
+    navigate(path);
+  };
 
   return (
     <Box sx={{
@@ -109,7 +116,7 @@ const Home = () => {
               textAlign: 'center',
               cursor: 'pointer',
               '&:hover': { background: 'rgba(50, 50, 50, 0.95)' },
-            }}>
+            }} onClick={handleNavigation('/recharge')}> {/* Added onClick for navigation */}
               <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}> {/* Flex container for horizontal layout */}
                 <Typography variant="h6" sx={{ color: '#00ff88' }}>
                   Recharge
@@ -127,7 +134,7 @@ const Home = () => {
               textAlign: 'center',
               cursor: 'pointer',
               '&:hover': { background: 'rgba(50, 50, 50, 0.95)' },
-            }}>
+            }} onClick={handleNavigation('/withdraw')}> {/* Added onClick for navigation */}
               <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}> {/* Flex container for horizontal layout */}
                 <Typography variant="h6" sx={{ color: '#ff4081' }}>
                   Withdraw
