@@ -4,114 +4,94 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation'; // Import navigation styles
+// import 'swiper/css/pagination'; // Uncomment if you want pagination dots
+// import 'swiper/css/effect-fade'; // Uncomment if you want fade effect
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 const Home = () => {
-  const carouselRef = React.useRef(null);
+  // Remove ref and custom scrolling logic
+  // const carouselRef = React.useRef(null);
+  // const [currentIndex, setCurrentIndex] = React.useState(0);
 
-  // Function to scroll the carousel with looping
-  const scrollCarousel = (direction) => () => {
-    const container = carouselRef.current;
-    if (container) {
-      const { scrollLeft, clientWidth, scrollWidth } = container;
-      const scrollAmount = clientWidth; // Scroll by the width of one image
+  const images = [ 'https://picsum.photos/seed/picsum1/800/400', 'https://picsum.photos/seed/picsum2/800/400', 'https://picsum.photos/seed/picsum3/800/400' ]; // Define images array and potentially use wider images
 
-      if (direction === 'left') {
-        if (scrollLeft === 0) {
-          // At the beginning, jump to the end
-          container.scrollTo({ left: scrollWidth - clientWidth, behavior: 'smooth' });
-        } else {
-          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        }
-      } else { // direction === 'right'
-        if (scrollLeft + clientWidth >= scrollWidth) {
-          // At the end, jump to the beginning
-          container.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
-      }
-    }
-  };
+  // Remove custom scrolling logic
+  // const scrollCarousel = (direction) => () => {
+  //   const container = carouselRef.current;
+  //   if (container) {
+  //     const imageWidth = container.clientWidth;
+  //     let nextIndex = currentIndex;
+  //
+  //     if (direction === 'left') {
+  //       nextIndex = (currentIndex - 1 + images.length) % images.length;
+  //     } else { // direction === 'right'
+  //       nextIndex = (currentIndex + 1) % images.length;
+  //     }
+  //
+  //     const targetScrollLeft = nextIndex * imageWidth;
+  //
+  //     container.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+  //     setCurrentIndex(nextIndex);
+  //   }
+  // };
 
   return (
     <Box sx={{
       minHeight: 'calc(100vh - 64px)', // Adjust for bottom navbar height
       background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
       color: 'white',
-      p: 3,
+      // Removed overall padding from this box
     }}>
-      <Container maxWidth="lg">
-        <Box sx={{
-          position: 'relative',
-          width: '100%',
-          mb: 4,
-          borderRadius: 3,
-          overflow: 'hidden',
-        }}>
-          <Box
-            ref={carouselRef}
-            sx={{
-              display: 'flex',
-              overflowX: 'scroll',
-              scrollbarWidth: 'none', // Hide scrollbar for Firefox
-              '&::-webkit-scrollbar': { display: 'none' }, // Hide scrollbar for Chrome, Safari, Edge
-              // scrollSnapType: 'x mandatory', // Optional: snap to images - potentially interfering with full width
-              WebkitOverflowScrolling: 'touch',
-            }}
-          >
-            {/* Temporary Images */}
-            {[ 'https://picsum.photos/seed/picsum1/600/400', 'https://picsum.photos/seed/picsum2/600/400', 'https://picsum.photos/seed/picsum3/600/400' ].map((imgUrl, index) => (
+      {/* Full-width Image Carousel Section using Swiper */}
+      <Box sx={{
+        position: 'relative',
+        width: '100%',
+        mb: 4,
+        overflow: 'hidden', // Ensure content doesn't spill out
+      }}>
+        <Swiper
+          modules={[Navigation]} // Enable Navigation module
+          loop={true} // Enable infinite looping
+          spaceBetween={0} // No space between slides for full width
+          slidesPerView={1} // Display one slide at a time
+          navigation={true} // Enable navigation arrows
+          // Add other Swiper configurations here if needed, e.g., pagination
+          // Add styles for navigation arrows
+          sx={{
+            '.swiper-button-next, .swiper-button-prev': {
+              color: 'white', // Set arrow color to white
+            },
+          }}
+        >
+          {images.map((imgUrl, index) => (
+            <SwiperSlide key={index}>
               <Box
-                key={index}
                 sx={{
-                  flexShrink: 0,
-                  width: '100%', // Make image full width of the container
-                  height: '250px',
+                  width: '100vw', // Make image take full viewport width
+                  height: '250px', // Adjust image height as needed
                   backgroundImage: `url(${imgUrl})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  borderRadius: 2,
-                  // Removed margin to allow full width
-                  scrollSnapAlign: 'start', // Keep snap for potentially smoother scrolling
+                  // Removed borderRadius for full edge-to-edge display
                 }}
               />
-            ))}
-          </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
 
-          <IconButton
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: 8,
-              transform: 'translateY(-50%)',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              color: 'white',
-              '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.7)' },
-              zIndex: 1,
-            }}
-            onClick={scrollCarousel('left')}
-          >
-            <ChevronLeftIcon />
-          </IconButton>
-          <IconButton
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              right: 8,
-              transform: 'translateY(-50%)',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              color: 'white',
-              '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.7)' },
-              zIndex: 1,
-            }}
-            onClick={scrollCarousel('right')}
-          >
-            <ChevronRightIcon />
-          </IconButton>
-        </Box>
-        
+      {/* Rest of the content within a padded container */}
+      <Container maxWidth="lg" sx={{
+        p: 3, // Apply padding to the main content area
+      }}>
         <Typography variant="h4" gutterBottom sx={{ color: '#00ff88', fontWeight: 700, mb: 4, textAlign: 'center' }}>
           Welcome Home!
         </Typography>

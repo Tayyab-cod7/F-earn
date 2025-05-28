@@ -16,6 +16,9 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
 import config from '../../config';
+import AuthNavbar from '../AuthNavbar';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -31,6 +34,7 @@ const Register = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const validateUsername = (username) => {
     if (!username) {
@@ -130,6 +134,11 @@ const Register = () => {
     e.preventDefault();
     setError('');
     
+    if (!termsAccepted) {
+      setError('Please accept the terms and conditions.');
+      return;
+    }
+
     if (!validateUsername(formData.username)) {
       return;
     }
@@ -164,172 +173,188 @@ const Register = () => {
   };
 
   return (
-    <Box
-      sx={{
-        height: '100vh',
-        width: '100vw',
-        background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        p: 0,
-      }}
-    >
-      <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', overflow: 'hidden' }}>
-        <Paper
-          elevation={8}
-          sx={{
-            p: { xs: 2, sm: 4, md: 5 },
-            width: { xs: '95vw', sm: '450px', md: '500px' },
-            maxWidth: '98vw',
-            borderRadius: 5,
-            background: 'rgba(30, 30, 30, 0.85)',
-            backdropFilter: 'blur(16px)',
-            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            mt: { xs: 2, sm: 3 },
-            mb: { xs: 2, sm: 3 },
-          }}
-        >
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
-            <AccountBalanceWalletIcon sx={{ fontSize: { xs: 48, sm: 60 }, color: 'primary.main', mb: 1 }} />
-            <Typography component="h1" variant="h4" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: '1.5rem', sm: '2rem' } }}>
-              Create Account
-            </Typography>
-          </Box>
-          {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {error}
-            </Alert>
-          )}
-          <form onSubmit={handleSubmit}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              value={formData.username}
-              onChange={handleChange}
-              error={!!usernameError}
-              helperText={usernameError}
-              inputProps={{
-                maxLength: 8,
-                pattern: '[a-zA-Z0-9]*'
-              }}
-              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-              InputLabelProps={{ style: { color: '#bdbdbd' } }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="phoneNumber"
-              label="Phone Number"
-              name="phoneNumber"
-              autoComplete="tel"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              error={!!phoneError}
-              helperText={phoneError}
-              inputProps={{
-                maxLength: 11,
-                pattern: '[0-9]*',
-                inputMode: 'numeric'
-              }}
-              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-              InputLabelProps={{ style: { color: '#bdbdbd' } }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Gmail Address"
-              name="email"
-              autoComplete="email"
-              value={formData.email}
-              onChange={handleChange}
-              error={!!emailError}
-              helperText={emailError || "Please use your Gmail address"}
-              placeholder="example@gmail.com"
-              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-              InputLabelProps={{ style: { color: '#bdbdbd' } }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              autoComplete="new-password"
-              value={formData.password}
-              onChange={handleChange}
-              error={!!passwordError}
-              helperText={passwordError || "6-8 characters, letters and numbers only"}
-              inputProps={{
-                maxLength: 8,
-                pattern: '[a-zA-Z0-9]*',
-                style: { letterSpacing: '0.1em' }
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                      sx={{ color: '#bdbdbd' }}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-                style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
-              }}
-              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-              InputLabelProps={{ style: { color: '#bdbdbd' } }}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              size="large"
-              sx={{
-                mb: 1.5,
-                py: 1.5,
-                fontWeight: 700,
-                fontSize: { xs: '1rem', sm: '1.1rem' },
-                background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
-                color: '#222',
-                boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
-                borderRadius: 3,
-                transition: 'background 0.3s',
-                '&:hover': {
-                  background: 'linear-gradient(90deg, #21CBF3 0%, #00ff88 100%)',
-                  color: '#111',
-                },
-              }}
-            >
-              Sign Up
-            </Button>
-            <Box sx={{ textAlign: 'center', mt: 1 }}>
-              <Link to="/login" style={{ textDecoration: 'none' }}>
-                <Typography variant="body2" color="primary" sx={{ fontWeight: 600 }}>
-                  Already have an account? Login
-                </Typography>
-              </Link>
+    <Box>
+      <AuthNavbar />
+      <Box
+        sx={{
+          height: 'calc(100vh - 64px)',
+          width: '100vw',
+          background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          p: 0,
+          '&::-webkit-scrollbar': { display: 'none' },
+          scrollbarWidth: 'none',
+          msOverflowStyle: '-ms-autohiding-scrollbar',
+        }}
+      >
+        <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', overflow: 'hidden' }}>
+          <Paper
+            elevation={8}
+            sx={{
+              p: { xs: 2, sm: 4, md: 5 },
+              width: { xs: '95vw', sm: '450px', md: '500px' },
+              maxWidth: '98vw',
+              borderRadius: 5,
+              background: 'rgba(30, 30, 30, 0.85)',
+              backdropFilter: 'blur(16px)',
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              mt: { xs: 2, sm: 3 },
+              mb: { xs: 2, sm: 3 },
+            }}
+          >
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
+              <AccountBalanceWalletIcon sx={{ fontSize: { xs: 48, sm: 60 }, color: 'primary.main', mb: 1 }} />
+              <Typography component="h1" variant="h4" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: '1.5rem', sm: '2rem' } }}>
+                Create Account
+              </Typography>
             </Box>
-          </form>
-        </Paper>
-      </Container>
+            {error && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                {error}
+              </Alert>
+            )}
+            <form onSubmit={handleSubmit}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={formData.username}
+                onChange={handleChange}
+                error={!!usernameError}
+                helperText={usernameError}
+                inputProps={{
+                  maxLength: 8,
+                  pattern: '[a-zA-Z0-9]*'
+                }}
+                sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+                InputLabelProps={{ style: { color: '#bdbdbd' } }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="phoneNumber"
+                label="Phone Number"
+                name="phoneNumber"
+                autoComplete="tel"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                error={!!phoneError}
+                helperText={phoneError}
+                inputProps={{
+                  maxLength: 11,
+                  pattern: '[0-9]*',
+                  inputMode: 'numeric'
+                }}
+                sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+                InputLabelProps={{ style: { color: '#bdbdbd' } }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Gmail Address"
+                name="email"
+                autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
+                error={!!emailError}
+                helperText={emailError || "Please use your Gmail address"}
+                placeholder="example@gmail.com"
+                sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+                InputLabelProps={{ style: { color: '#bdbdbd' } }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                autoComplete="new-password"
+                value={formData.password}
+                onChange={handleChange}
+                error={!!passwordError}
+                helperText={passwordError || "6-8 characters, letters and numbers only"}
+                inputProps={{
+                  maxLength: 8,
+                  pattern: '[a-zA-Z0-9]*',
+                  style: { letterSpacing: '0.1em' }
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                        sx={{ color: '#bdbdbd' }}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                  style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
+                }}
+                sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
+                InputLabelProps={{ style: { color: '#bdbdbd' } }}
+              />
+              <FormControlLabel
+                control={<Checkbox checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} sx={{ color: '#00ff88', '&.Mui-checked': { color: '#00ff88' } }} />}
+                label={
+                  <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
+                    I accept the <Link to="/terms-and-conditions" style={{ color: '#00ff88', textDecoration: 'none' }}>term and condition</Link>
+                  </Typography>
+                }
+                sx={{ mb: 2 }}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                size="large"
+                disabled={!termsAccepted}
+                sx={{
+                  mb: 1.5,
+                  py: 1.5,
+                  fontWeight: 700,
+                  fontSize: { xs: '1rem', sm: '1.1rem' },
+                  background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
+                  color: '#222',
+                  boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
+                  borderRadius: 3,
+                  transition: 'background 0.3s',
+                  '&:hover': {
+                    background: 'linear-gradient(90deg, #21CBF3 0%, #00ff88 100%)',
+                    color: '#111',
+                  },
+                }}
+              >
+                Sign Up
+              </Button>
+              <Box sx={{ textAlign: 'center', mt: 1 }}>
+                <Link to="/login" style={{ textDecoration: 'none' }}>
+                  <Typography variant="body2" color="primary" sx={{ fontWeight: 600 }}>
+                    Already have an account? Login
+                  </Typography>
+                </Link>
+              </Box>
+            </form>
+          </Paper>
+        </Container>
+      </Box>
     </Box>
   );
 };

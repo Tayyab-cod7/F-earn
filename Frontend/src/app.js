@@ -11,6 +11,7 @@ import Task from './components/Task';
 import Team from './components/Team';
 import VIP from './components/VIP';
 import Me from './components/Me';
+import TermsAndConditions from './components/TermsAndConditions';
 import { Box } from '@mui/material';
 
 // Create theme
@@ -66,7 +67,15 @@ const Layout = () => {
   return (
     <>
       {/* Main content area, adjusted for fixed bottom navbar */}
-      <Box sx={{ pb: '64px' }}> {/* Add padding-bottom equal to navbar height */}
+      <Box sx={{
+        pb: '64px', // Add padding-bottom equal to navbar height
+        overflowY: 'auto', // Enable vertical scrolling if content overflows
+        height: 'calc(100vh - 64px)', // Set height to allow scrolling
+        // Hide scrollbar
+        '&::-webkit-scrollbar': { display: 'none' }, // Hide scrollbar for Chrome, Safari, Edge
+        scrollbarWidth: 'none', // Hide scrollbar for Firefox
+        msOverflowStyle: '-ms-autohiding-scrollbar', // Hide scrollbar for Internet Explorer and Edge
+      }}>
         <Outlet />
       </Box>
       <Navbar /> {/* Navbar is now at the bottom */}
@@ -83,18 +92,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Navigate to="/home" replace />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'register',
-        element: <Register />,
-      },
-      {
-        path: 'admin-dashboard',
-        element: <AdminDashboard />,
       },
       {
         path: 'home',
@@ -116,8 +113,24 @@ const router = createBrowserRouter([
         path: 'me',
         element: <Me />,
       },
+      {
+        path: 'admin-dashboard',
+        element: <AdminDashboard />,
+      },
     ],
   },
+  {
+    path: 'login',
+    element: <Login />,
+  },
+  {
+    path: 'register',
+    element: <Register />,
+  },
+  {
+    path: 'terms-and-conditions',
+    element: <TermsAndConditions />,
+  }
 ], {
   future: {
     v7_startTransition: true,
