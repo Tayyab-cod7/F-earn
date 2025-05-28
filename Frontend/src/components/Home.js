@@ -10,20 +10,34 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const Home = () => {
   const carouselRef = React.useRef(null);
 
+  // Function to scroll the carousel with looping
   const scrollCarousel = (direction) => () => {
-    const scrollAmount = 300;
-    if (carouselRef.current) {
+    const container = carouselRef.current;
+    if (container) {
+      const { scrollLeft, clientWidth, scrollWidth } = container;
+      const scrollAmount = clientWidth; // Scroll by the width of one image
+
       if (direction === 'left') {
-        carouselRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      } else {
-        carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        if (scrollLeft === 0) {
+          // At the beginning, jump to the end
+          container.scrollTo({ left: scrollWidth - clientWidth, behavior: 'smooth' });
+        } else {
+          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
+      } else { // direction === 'right'
+        if (scrollLeft + clientWidth >= scrollWidth) {
+          // At the end, jump to the beginning
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
       }
     }
   };
 
   return (
     <Box sx={{
-      minHeight: 'calc(100vh - 64px)',
+      minHeight: 'calc(100vh - 64px)', // Adjust for bottom navbar height
       background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
       color: 'white',
       p: 3,
@@ -41,9 +55,9 @@ const Home = () => {
             sx={{
               display: 'flex',
               overflowX: 'scroll',
-              scrollbarWidth: 'none',
-              '&::-webkit-scrollbar': { display: 'none' },
-              scrollSnapType: 'x mandatory',
+              scrollbarWidth: 'none', // Hide scrollbar for Firefox
+              '&::-webkit-scrollbar': { display: 'none' }, // Hide scrollbar for Chrome, Safari, Edge
+              // scrollSnapType: 'x mandatory', // Optional: snap to images - potentially interfering with full width
               WebkitOverflowScrolling: 'touch',
             }}
           >
@@ -53,13 +67,14 @@ const Home = () => {
                 key={index}
                 sx={{
                   flexShrink: 0,
-                  width: '100%',
+                  width: '100%', // Make image full width of the container
                   height: '250px',
                   backgroundImage: `url(${imgUrl})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   borderRadius: 2,
-                  scrollSnapAlign: 'start',
+                  // Removed margin to allow full width
+                  scrollSnapAlign: 'start', // Keep snap for potentially smoother scrolling
                 }}
               />
             ))}
