@@ -4,9 +4,13 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
 import AdminDashboard from './components/AdminDashboard';
+import Home from './components/Home';
+import Task from './components/Task';
+import Team from './components/Team';
+import VIP from './components/VIP';
+import Me from './components/Me';
 
 // Create theme
 const theme = createTheme({
@@ -56,12 +60,15 @@ const theme = createTheme({
   },
 });
 
-// Layout component that includes Navbar and Outlet
+// Layout component that includes Outlet and Navbar (now at the bottom)
 const Layout = () => {
   return (
     <>
-      <Navbar />
-      <Outlet />
+      {/* Main content area, adjusted for fixed bottom navbar */}
+      <Box sx={{ pb: '64px' }}> {/* Add padding-bottom equal to navbar height */}
+        <Outlet />
+      </Box>
+      <Navbar /> {/* Navbar is now at the bottom */}
     </>
   );
 };
@@ -74,7 +81,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/register" replace />,
+        element: <Navigate to="/home" replace />,
       },
       {
         path: 'login',
@@ -85,12 +92,28 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: 'dashboard',
-        element: <Dashboard />,
-      },
-      {
         path: 'admin-dashboard',
         element: <AdminDashboard />,
+      },
+      {
+        path: 'home',
+        element: <Home />,
+      },
+      {
+        path: 'task',
+        element: <Task />,
+      },
+      {
+        path: 'team',
+        element: <Team />,
+      },
+      {
+        path: 'vip',
+        element: <VIP />,
+      },
+      {
+        path: 'me',
+        element: <Me />,
       },
     ],
   },
@@ -110,4 +133,5 @@ function App() {
   );
 }
 
-export default App; 
+// Removed duplicate default export
+// export default App; 

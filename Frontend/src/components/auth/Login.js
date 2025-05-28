@@ -82,7 +82,7 @@ const Login = () => {
         if (isAdmin) {
           navigate('/admin-dashboard');
         } else {
-          navigate('/dashboard');
+          navigate('/home');
         }
       } else {
         setError('Login successful but no token received');

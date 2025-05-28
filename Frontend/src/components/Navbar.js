@@ -9,6 +9,13 @@ import {
   Container
 } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import HomeIcon from '@mui/icons-material/Home';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import GroupIcon from '@mui/icons-material/Group';
+import DiamondIcon from '@mui/icons-material/Diamond';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -21,82 +28,41 @@ const Navbar = () => {
     navigate('/login', { replace: true });
   };
 
+  const handleNavigation = (path) => () => {
+    navigate(path);
+  };
+
   return (
-    <AppBar position="static" sx={{ background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)' }}>
+    <AppBar position="fixed" color="primary" sx={{
+      top: 'auto',
+      bottom: 0,
+      width: '100%',
+      boxShadow: '0 -4px 10px rgba(0,0,0,0.2)',
+      backgroundColor: '#1e1e1e',
+      borderTop: '1px solid rgba(255,255,255,0.1)',
+    }}>
       <Container maxWidth="lg">
-        <Toolbar>
-          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-            <AccountBalanceWalletIcon sx={{ mr: 1 }} />
-            <Typography 
-              variant="h5" 
-              component={Link}
-              to="/"
-              sx={{ 
-                fontWeight: 'bold',
-                letterSpacing: '1px',
-                textDecoration: 'none',
-                color: 'inherit'
-              }}
-            >
-              F-EARN
-            </Typography>
-          </Box>
-          <Box>
-            {token ? (
-              <>
-                <Typography 
-                  variant="body1" 
-                  component="span" 
-                  sx={{ 
-                    mr: 2,
-                    fontWeight: 'medium'
-                  }}
-                >
-                  Welcome, {user.username}
-                </Typography>
-                <Button 
-                  color="inherit" 
-                  onClick={handleLogout}
-                  variant="outlined"
-                  sx={{ 
-                    borderColor: 'white',
-                    '&:hover': {
-                      borderColor: 'white',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)'
-                    }
-                  }}
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button 
-                  color="inherit" 
-                  component={Link}
-                  to="/login"
-                  sx={{ mr: 1 }}
-                >
-                  Login
-                </Button>
-                <Button 
-                  color="inherit" 
-                  component={Link}
-                  to="/register"
-                  variant="outlined"
-                  sx={{ 
-                    borderColor: 'white',
-                    '&:hover': {
-                      borderColor: 'white',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)'
-                    }
-                  }}
-                >
-                  Register
-                </Button>
-              </>
-            )}
-          </Box>
+        <Toolbar sx={{ justifyContent: 'space-around', minHeight: '64px' }}>
+          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/home')}>
+            <HomeIcon />
+            <Typography variant="caption">Home</Typography>
+          </Button>
+          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/task')}>
+            <AssignmentIcon />
+            <Typography variant="caption">Task</Typography>
+          </Button>
+          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/team')}>
+            <GroupIcon />
+            <Typography variant="caption">Team</Typography>
+          </Button>
+          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/vip')}>
+            <DiamondIcon />
+            <Typography variant="caption">VIP</Typography>
+          </Button>
+          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/me')}>
+            <PersonIcon />
+            <Typography variant="caption">Me</Typography>
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>
