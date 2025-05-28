@@ -1,11 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
   Typography,
   Button,
-  Container
+  Container,
+  Box
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -15,9 +16,14 @@ import PersonIcon from '@mui/icons-material/Person';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigation = (path) => () => {
     navigate(path);
+  };
+
+  const isActive = (path) => {
+    return location.pathname === path;
   };
 
   return (
@@ -31,23 +37,78 @@ const Navbar = () => {
     }}>
       <Container maxWidth="lg">
         <Toolbar sx={{ justifyContent: 'space-around', minHeight: '64px' }}>
-          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/home')}>
+          <Button
+            color="inherit"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textTransform: 'none',
+              color: isActive('/home') ? '#00ff88' : 'inherit',
+              fontWeight: isActive('/home') ? 'bold' : 'normal',
+            }}
+            onClick={handleNavigation('/home')}
+          >
             <HomeIcon />
             <Typography variant="caption">Home</Typography>
           </Button>
-          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/task')}>
+          <Button
+            color="inherit"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textTransform: 'none',
+              color: isActive('/task') ? '#00ff88' : 'inherit',
+              fontWeight: isActive('/task') ? 'bold' : 'normal',
+            }}
+            onClick={handleNavigation('/task')}
+          >
             <AssignmentIcon />
             <Typography variant="caption">Task</Typography>
           </Button>
-          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/team')}>
+          <Button
+            color="inherit"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textTransform: 'none',
+              color: isActive('/team') ? '#00ff88' : 'inherit',
+              fontWeight: isActive('/team') ? 'bold' : 'normal',
+            }}
+            onClick={handleNavigation('/team')}
+          >
             <GroupIcon />
             <Typography variant="caption">Team</Typography>
           </Button>
-          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/vip')}>
+          <Button
+            color="inherit"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textTransform: 'none',
+              color: isActive('/vip') ? '#00ff88' : 'inherit',
+              fontWeight: isActive('/vip') ? 'bold' : 'normal',
+            }}
+            onClick={handleNavigation('/vip')}
+          >
             <DiamondIcon />
             <Typography variant="caption">VIP</Typography>
           </Button>
-          <Button color="inherit" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textTransform: 'none' }} onClick={handleNavigation('/me')}>
+          <Button
+            color="inherit"
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textTransform: 'none',
+              color: isActive('/me') ? '#00ff88' : 'inherit',
+              fontWeight: isActive('/me') ? 'bold' : 'normal',
+            }}
+            onClick={handleNavigation('/me')}
+          >
             <PersonIcon />
             <Typography variant="caption">Me</Typography>
           </Button>
