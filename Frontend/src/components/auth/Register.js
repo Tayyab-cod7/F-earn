@@ -166,23 +166,24 @@ const Register = () => {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        height: '100vh',
         width: '100vw',
         background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        overflow: 'hidden',
         p: 0,
       }}
     >
-      <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', overflow: 'hidden' }}>
         <Paper
           elevation={8}
           sx={{
-            p: { xs: 1.5, sm: 2, md: 2.5 },
-            width: { xs: '95vw', sm: '380px', md: '380px' },
-            maxWidth: '98vw',
-            borderRadius: 2,
+            p: { xs: 2, sm: 3, md: 3 },
+            width: { xs: '90vw', sm: '340px', md: '340px' },
+            maxWidth: '95vw',
+            borderRadius: 5,
             background: 'rgba(30, 30, 30, 0.85)',
             backdropFilter: 'blur(16px)',
             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
@@ -190,20 +191,20 @@ const Register = () => {
             mt: { xs: 2, sm: 4 },
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 0.5 }}>
-            <AccountBalanceWalletIcon sx={{ fontSize: { xs: 32, sm: 36 }, color: 'primary.main', mb: 0.5 }} />
-            <Typography component="h1" variant="h4" sx={{ fontWeight: 700, mb: 0.5, fontSize: { xs: '1.1rem', sm: '1.3rem' } }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
+            <AccountBalanceWalletIcon sx={{ fontSize: { xs: 48, sm: 60 }, color: 'primary.main', mb: 1 }} />
+            <Typography component="h1" variant="h4" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: '1.5rem', sm: '2rem' } }}>
               Create Account
             </Typography>
           </Box>
           {error && (
-            <Alert severity="error" sx={{ mb: 1, py: 0.5 }}>
+            <Alert severity="error" sx={{ mb: 2 }}>
               {error}
             </Alert>
           )}
           <form onSubmit={handleSubmit}>
             <TextField
-              margin="dense"
+              margin="normal"
               required
               fullWidth
               id="username"
@@ -219,12 +220,11 @@ const Register = () => {
                 maxLength: 8,
                 pattern: '[a-zA-Z0-9]*'
               }}
-              sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 1 }}
+              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              size="small"
             />
             <TextField
-              margin="dense"
+              margin="normal"
               required
               fullWidth
               id="phoneNumber"
@@ -240,12 +240,11 @@ const Register = () => {
                 pattern: '[0-9]*',
                 inputMode: 'numeric'
               }}
-              sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 1 }}
+              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              size="small"
             />
             <TextField
-              margin="dense"
+              margin="normal"
               required
               fullWidth
               id="email"
@@ -257,12 +256,11 @@ const Register = () => {
               error={!!emailError}
               helperText={emailError || "Please use your Gmail address"}
               placeholder="example@gmail.com"
-              sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 1 }}
+              sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              size="small"
             />
             <TextField
-              margin="dense"
+              margin="normal"
               required
               fullWidth
               name="password"
@@ -287,33 +285,31 @@ const Register = () => {
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
-                      sx={{ color: '#bdbdbd', padding: '4px' }}
-                      size="small"
+                      sx={{ color: '#bdbdbd' }}
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
-                style: { background: 'rgba(255,255,255,0.04)', borderRadius: 4 }
+                style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
               }}
-              sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 1 }}
+              sx={{ mb: 3, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
               InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              size="small"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              size="medium"
+              size="large"
               sx={{
-                mb: 1,
-                py: 0.75,
-                fontWeight: 600,
-                fontSize: { xs: '0.85rem', sm: '0.9rem' },
+                mb: 2,
+                py: 1.5,
+                fontWeight: 700,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
                 background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
                 color: '#222',
                 boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
-                borderRadius: 1,
+                borderRadius: 3,
                 transition: 'background 0.3s',
                 '&:hover': {
                   background: 'linear-gradient(90deg, #21CBF3 0%, #00ff88 100%)',
@@ -323,9 +319,9 @@ const Register = () => {
             >
               Sign Up
             </Button>
-            <Box sx={{ textAlign: 'center', mt: 0.5 }}>
+            <Box sx={{ textAlign: 'center', mt: 1 }}>
               <Link to="/login" style={{ textDecoration: 'none' }}>
-                <Typography variant="body2" color="primary" sx={{ fontWeight: 600, fontSize: '0.85rem' }}>
+                <Typography variant="body2" color="primary" sx={{ fontWeight: 600 }}>
                   Already have an account? Login
                 </Typography>
               </Link>

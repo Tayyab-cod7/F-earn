@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ background: 'linear-gradient(45deg, #ff1744 30%, #ff4081 90%)' }}>
+    <AppBar position="static" sx={{ background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)' }}>
       <Container maxWidth="lg">
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
