@@ -5,8 +5,8 @@ import InfoIcon from '@mui/icons-material/Info';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 // Import icons for carousel navigation
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'; // Remove unused icons
+// import ChevronRightIcon from '@mui/icons-material/ChevronRight'; // Remove unused icons
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
