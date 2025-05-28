@@ -53,13 +53,12 @@ const Home = () => {
                 key={index}
                 sx={{
                   flexShrink: 0,
-                  width: '90%',
+                  width: '100%',
                   height: '250px',
                   backgroundImage: `url(${imgUrl})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   borderRadius: 2,
-                  mr: 2,
                   scrollSnapAlign: 'start',
                 }}
               />
