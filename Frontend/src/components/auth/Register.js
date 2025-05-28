@@ -180,15 +180,16 @@ const Register = () => {
         <Paper
           elevation={8}
           sx={{
-            p: { xs: 2, sm: 3, md: 4 },
-            width: { xs: '90vw', sm: '340px', md: '340px' },
-            maxWidth: '95vw',
+            p: { xs: 2, sm: 4, md: 5 },
+            width: { xs: '95vw', sm: '450px', md: '500px' },
+            maxWidth: '98vw',
             borderRadius: 5,
             background: 'rgba(30, 30, 30, 0.85)',
             backdropFilter: 'blur(16px)',
             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
             border: '1px solid rgba(255,255,255,0.08)',
-            mt: { xs: 2, sm: 4 },
+            mt: { xs: 2, sm: 3 },
+            mb: { xs: 2, sm: 3 },
           }}
         >
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
