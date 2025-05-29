@@ -27,6 +27,22 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   
+  // Referral system fields
+  referralCode: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  referredBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null
+  },
+  referralCount: {
+    type: Number,
+    default: 0
+  },
+  
   // Investment related fields
   balance: {
     type: Number,
@@ -87,10 +103,16 @@ if (process.env.NODE_ENV !== 'production') {
         username: 'admin',
         phoneNumber: '03151251123',
         email: 'admin@gmail.com',
-        password: 'admin123'
+        password: 'admin123',
+        referralCode: '000000' // Set admin's referral code to 000000
       });
       await admin.save();
       console.log('Admin user created!');
+    } else if (!user.referralCode) {
+      // If admin exists but doesn't have a referral code, add it
+      user.referralCode = '000000';
+      await user.save();
+      console.log('Admin referral code added!');
     }
   });
 } 

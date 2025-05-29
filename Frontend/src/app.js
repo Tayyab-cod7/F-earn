@@ -16,6 +16,12 @@ import Recharge from './components/Recharge';
 import Withdraw from './components/Withdraw';
 import { Box } from '@mui/material';
 
+// ProtectedRoute component
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = Boolean(localStorage.getItem('token'));
+  return isAuthenticated ? children : <Navigate to="/register" replace />;
+};
+
 // Create theme
 const theme = createTheme({
   palette: {
@@ -97,35 +103,35 @@ const router = createBrowserRouter([
       },
       {
         path: 'home',
-        element: <Home />,
+        element: <ProtectedRoute><Home /></ProtectedRoute>,
       },
       {
         path: 'task',
-        element: <Task />,
+        element: <ProtectedRoute><Task /></ProtectedRoute>,
       },
       {
         path: 'team',
-        element: <Team />,
+        element: <ProtectedRoute><Team /></ProtectedRoute>,
       },
       {
         path: 'vip',
-        element: <VIP />,
+        element: <ProtectedRoute><VIP /></ProtectedRoute>,
       },
       {
         path: 'me',
-        element: <Me />,
+        element: <ProtectedRoute><Me /></ProtectedRoute>,
       },
       {
         path: 'admin-dashboard',
-        element: <AdminDashboard />,
+        element: <ProtectedRoute><AdminDashboard /></ProtectedRoute>,
       },
       {
         path: 'recharge',
-        element: <Recharge />,
+        element: <ProtectedRoute><Recharge /></ProtectedRoute>,
       },
       {
         path: 'withdraw',
-        element: <Withdraw />,
+        element: <ProtectedRoute><Withdraw /></ProtectedRoute>,
       },
     ],
   },

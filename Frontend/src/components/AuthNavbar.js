@@ -42,9 +42,14 @@ const AuthNavbar = () => {
                   variant="outlined"
                   sx={{ 
                     borderColor: 'white',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    px: 3,
+                    borderRadius: 3,
                     '&:hover': {
                       borderColor: 'white',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                      background: 'linear-gradient(90deg, #00c6fb 0%, #005bea 100%)',
+                      color: 'white',
                     }
                   }}
                 >
@@ -55,7 +60,19 @@ const AuthNavbar = () => {
                   color="inherit" 
                   component={Link}
                   to="/login"
-                  sx={{ mr: 1 }}
+                  variant="outlined"
+                  sx={{ 
+                    borderColor: 'white',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    px: 3,
+                    borderRadius: 3,
+                    '&:hover': {
+                      borderColor: 'white',
+                      background: 'linear-gradient(90deg, #00c6fb 0%, #005bea 100%)',
+                      color: 'white',
+                    }
+                  }}
                 >
                   Login
                 </Button>

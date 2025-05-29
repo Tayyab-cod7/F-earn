@@ -4,10 +4,34 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const authMiddleware = require('../middleware/auth'); // If you want to protect the route
 
+// Helper function to generate a unique 6-digit referral code
+const generateReferralCode = async () => {
+  let code;
+  let isUnique = false;
+  
+  while (!isUnique) {
+    // Generate a random 6-digit number
+    code = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    // Check if code already exists
+    const existingUser = await User.findOne({ referralCode: code });
+    if (!existingUser) {
+      isUnique = true;
+    }
+  }
+  
+  return code;
+};
+
 // Register new user
 router.post('/register', async (req, res) => {
   try {
-    const { username, phoneNumber, email, password } = req.body;
+    const { username, phoneNumber, email, password, referralCode } = req.body;
+
+    // Validate required fields
+    if (!referralCode) {
+      return res.status(400).json({ message: 'Referral code is required' });
+    }
 
     // Check if user already exists
     const existingUser = await User.findOne({ 
@@ -21,15 +45,29 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'User already exists with this email, username, or phone number' });
     }
 
+    // Find the referrer
+    const referrer = await User.findOne({ referralCode });
+    if (!referrer) {
+      return res.status(400).json({ message: 'Invalid referral code' });
+    }
+
+    // Generate a unique referral code for the new user
+    const newReferralCode = await generateReferralCode();
+
     // Create new user
     const user = new User({
       username,
       phoneNumber,
       email,
-      password
+      password,
+      referralCode: newReferralCode,
+      referredBy: referrer._id
     });
 
     await user.save();
+
+    // Increment referrer's referral count
+    await User.findByIdAndUpdate(referrer._id, { $inc: { referralCount: 1 } });
 
     // Generate JWT token
     const token = jwt.sign(
@@ -45,7 +83,8 @@ router.post('/register', async (req, res) => {
         id: user._id,
         username: user.username,
         phoneNumber: user.phoneNumber,
-        email: user.email
+        email: user.email,
+        referralCode: user.referralCode
       }
     });
   } catch (error) {
