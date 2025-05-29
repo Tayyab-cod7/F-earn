@@ -15,7 +15,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
 import config from '../../config';
-import AuthNavbar from '../AuthNavbar';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Dialog from '@mui/material/Dialog';
@@ -42,6 +41,7 @@ const Register = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
   const [newReferralCode, setNewReferralCode] = useState('');
+
 
   const validateUsername = (username) => {
     if (!username) {
@@ -160,7 +160,7 @@ const Register = () => {
       setError('Please accept the terms and conditions.');
       return;
     }
-
+    
     if (!validateUsername(formData.username)) {
       return;
     }
@@ -198,7 +198,7 @@ const Register = () => {
       if (err.response?.data?.message === 'Invalid referral code') {
         setReferralCodeError('Referral code is invalid. Please check and try again.');
       } else {
-        setError(err.response?.data?.message || 'An error occurred during registration. Please try again.');
+      setError(err.response?.data?.message || 'An error occurred during registration. Please try again.');
       }
     }
   };
@@ -214,20 +214,28 @@ const Register = () => {
       justifyContent: 'flex-start',
       p: 0,
       overflowY: 'auto',
-      position: 'relative',
+      overflowX: 'hidden',
+      height: 'calc(100vh - 64px)',
       '&::-webkit-scrollbar': { display: 'none' },
       scrollbarWidth: 'none',
-      msOverflowStyle: 'none',
+      msOverflowStyle: '-ms-autohiding-scrollbar',
+      position: 'relative',
     }}>
-      <AuthNavbar />
-      <Box sx={{ flex: 1, width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', mt: { xs: 2, sm: 4 } }}>
+      <Box sx={{ 
+        flex: 1, 
+        width: '100%', 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        overflowX: 'hidden'
+      }}>
         <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Paper
             elevation={8}
             sx={{
-              p: { xs: 2, sm: 3, md: 3 },
-              width: { xs: '99vw', sm: '540px', md: '600px' },
-              maxWidth: '99vw',
+              p: { xs: 1.5, sm: 2.5, md: 3 },
+              width: { xs: '95vw', sm: '450px', md: '500px' },
+              maxWidth: '98vw',
               borderRadius: 4,
               background: 'rgba(30, 30, 30, 0.85)',
               boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
@@ -244,101 +252,101 @@ const Register = () => {
             <Typography variant="subtitle1" sx={{ color: '#bdbdbd', mb: 1.2, textAlign: 'center', fontSize: '1rem' }}>
               Start earning money online - create your account today
             </Typography>
-            {error && (
+          {error && (
               <Alert severity="error" sx={{ mb: 1.2 }}>
-                {error}
-              </Alert>
-            )}
+              {error}
+            </Alert>
+          )}
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-              <TextField
+            <TextField
                 margin="dense"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
-                value={formData.username}
-                onChange={handleChange}
-                error={!!usernameError}
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              value={formData.username}
+              onChange={handleChange}
+              error={!!usernameError}
                 helperText={usernameError || '6-8 characters, letters and numbers only'}
-                inputProps={{
-                  maxLength: 8,
-                  pattern: '[a-zA-Z0-9]*'
-                }}
+              inputProps={{
+                maxLength: 8,
+                pattern: '[a-zA-Z0-9]*'
+              }}
                 sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-                InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              />
-              <TextField
+              InputLabelProps={{ style: { color: '#bdbdbd' } }}
+            />
+            <TextField
                 margin="dense"
-                required
-                fullWidth
-                id="phoneNumber"
+              required
+              fullWidth
+              id="phoneNumber"
                 label="Enter your phone number"
-                name="phoneNumber"
-                autoComplete="tel"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                error={!!phoneError}
+              name="phoneNumber"
+              autoComplete="tel"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              error={!!phoneError}
                 helperText={phoneError || 'Please enter exactly 11 digits'}
-                inputProps={{
-                  maxLength: 11,
-                  pattern: '[0-9]*',
-                  inputMode: 'numeric'
-                }}
+              inputProps={{
+                maxLength: 11,
+                pattern: '[0-9]*',
+                inputMode: 'numeric'
+              }}
                 sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-                InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              />
-              <TextField
+              InputLabelProps={{ style: { color: '#bdbdbd' } }}
+            />
+            <TextField
                 margin="dense"
-                required
-                fullWidth
-                id="email"
-                label="Gmail Address"
-                name="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={handleChange}
-                error={!!emailError}
+              required
+              fullWidth
+              id="email"
+              label="Gmail Address"
+              name="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={!!emailError}
                 helperText={emailError || 'Please use your Gmail address'}
-                placeholder="example@gmail.com"
+              placeholder="example@gmail.com"
                 sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-                InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              />
-              <TextField
+              InputLabelProps={{ style: { color: '#bdbdbd' } }}
+            />
+            <TextField
                 margin="dense"
-                required
-                fullWidth
-                name="password"
+              required
+              fullWidth
+              name="password"
                 label="Create a password"
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                autoComplete="new-password"
-                value={formData.password}
-                onChange={handleChange}
-                error={!!passwordError}
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              autoComplete="new-password"
+              value={formData.password}
+              onChange={handleChange}
+              error={!!passwordError}
                 helperText={passwordError || '6-8 characters, letters and numbers only'}
-                inputProps={{
-                  maxLength: 8,
-                  pattern: '[a-zA-Z0-9]*',
-                  style: { letterSpacing: '0.1em' }
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                        sx={{ color: '#bdbdbd' }}
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                  style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
-                }}
+              inputProps={{
+                maxLength: 8,
+                pattern: '[a-zA-Z0-9]*',
+                style: { letterSpacing: '0.1em' }
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                      sx={{ color: '#bdbdbd' }}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
+              }}
                 sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
                 InputLabelProps={{ style: { color: '#bdbdbd' } }}
               />
@@ -359,8 +367,8 @@ const Register = () => {
                   inputMode: 'numeric'
                 }}
                 sx={{ mb: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-                InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              />
+              InputLabelProps={{ style: { color: '#bdbdbd' } }}
+            />
               <FormControlLabel
                 control={<Checkbox checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} sx={{ color: '#00ff88', '&.Mui-checked': { color: '#00ff88' } }} />}
                 label={
@@ -370,29 +378,29 @@ const Register = () => {
                 }
                 sx={{ mb: 1 }}
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                size="large"
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
                 disabled={!termsAccepted}
-                sx={{
+              sx={{
                   mb: 1,
                   py: 1.2,
-                  fontWeight: 700,
-                  fontSize: { xs: '1rem', sm: '1.1rem' },
-                  background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
+                fontWeight: 700,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+                background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
                   color: '#fff',
                   borderRadius: 2,
-                  boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
-                  '&:hover': {
-                    background: 'linear-gradient(90deg, #21CBF3 0%, #00ff88 100%)',
+                boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
+                '&:hover': {
+                  background: 'linear-gradient(90deg, #21CBF3 0%, #00ff88 100%)',
                     color: '#fff',
-                  },
-                }}
-              >
+                },
+              }}
+            >
                 Create Account
-              </Button>
+            </Button>
               <Box sx={{ textAlign: 'center', mt: 0.5 }}>
                 <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
                   Already have an account?{' '}
@@ -400,10 +408,10 @@ const Register = () => {
                     Login
                   </Link>
                 </Typography>
-              </Box>
-            </form>
-          </Paper>
-        </Container>
+            </Box>
+          </form>
+        </Paper>
+      </Container>
       </Box>
       {/* Success Dialog */}
       <Dialog open={successDialogOpen} onClose={() => { setSuccessDialogOpen(false); navigate('/home'); }}>

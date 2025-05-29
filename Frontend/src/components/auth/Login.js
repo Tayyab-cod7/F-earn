@@ -11,11 +11,9 @@ import {
   InputAdornment,
   IconButton
 } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import axios from 'axios';
 import config from '../../config';
-import AuthNavbar from '../AuthNavbar';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -94,28 +92,27 @@ const Login = () => {
 
   return (
     <Box sx={{
-      minHeight: '100vh',
-      width: '100vw',
-      background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
-      display: 'flex',
+        minHeight: '100vh',
+        width: '100vw',
+        background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
+        display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+        alignItems: 'center',
       justifyContent: 'flex-start',
-      p: 0,
+        p: 0,
       overflowX: 'hidden',
     }}>
-      <AuthNavbar />
       <Box sx={{ flex: 1, width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', overflowX: 'hidden' }}>
         <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 64px)', overflowX: 'hidden' }}>
-          <Paper
-            elevation={8}
-            sx={{
+        <Paper
+          elevation={8}
+          sx={{
               p: { xs: 2, sm: 4, md: 5 },
               width: { xs: '95vw', sm: '400px', md: '420px' },
-              maxWidth: '98vw',
+            maxWidth: '98vw',
               borderRadius: 4,
-              background: 'rgba(30, 30, 30, 0.85)',
-              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            background: 'rgba(30, 30, 30, 0.85)',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
               mt: { xs: 2, sm: 3 },
               mb: { xs: 2, sm: 3 },
               display: 'flex',
@@ -130,97 +127,97 @@ const Login = () => {
             <Typography variant="subtitle1" sx={{ color: '#bdbdbd', mb: 2, textAlign: 'center' }}>
               Access your earning dashboard securely
             </Typography>
-            {error && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                {error}
-              </Alert>
-            )}
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="identifier"
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="identifier"
                 label="Enter your phone number or email"
-                name="identifier"
-                autoComplete="username"
-                value={formData.identifier}
-                onChange={handleChange}
+              name="identifier"
+              autoComplete="username"
+              value={formData.identifier}
+              onChange={handleChange}
                 sx={{ mb: 1.5, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-                InputLabelProps={{ style: { color: '#bdbdbd' } }}
+              InputLabelProps={{ style: { color: '#bdbdbd' } }}
                 helperText={'Use your registered phone number or Gmail address'}
                 inputProps={{ maxLength: 50 }}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
                 label="Enter your password"
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                autoComplete="current-password"
-                value={formData.password}
-                onChange={handleChange}
-                error={!!passwordError}
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              autoComplete="current-password"
+              value={formData.password}
+              onChange={handleChange}
+              error={!!passwordError}
                 helperText={passwordError || '6-8 characters, letters and numbers only'}
-                inputProps={{
-                  maxLength: 8,
-                  pattern: '[a-zA-Z0-9]*',
-                  style: { letterSpacing: '0.1em' }
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                        sx={{ color: '#bdbdbd' }}
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                  style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
-                }}
+              inputProps={{
+                maxLength: 8,
+                pattern: '[a-zA-Z0-9]*',
+                style: { letterSpacing: '0.1em' }
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                      sx={{ color: '#bdbdbd' }}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                style: { background: 'rgba(255,255,255,0.04)', borderRadius: 8 }
+              }}
                 sx={{ mb: 2, background: 'rgba(255,255,255,0.04)', borderRadius: 2 }}
-                InputLabelProps={{ style: { color: '#bdbdbd' } }}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                size="large"
-                sx={{
+              InputLabelProps={{ style: { color: '#bdbdbd' } }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
+              sx={{
                   mb: 1.5,
-                  py: 1.5,
-                  fontWeight: 700,
-                  fontSize: { xs: '1rem', sm: '1.1rem' },
-                  background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
+                py: 1.5,
+                fontWeight: 700,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+                background: 'linear-gradient(90deg, #00ff88 0%, #2196F3 100%)',
                   color: '#fff',
                   borderRadius: 2,
-                  boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
-                  '&:hover': {
-                    background: 'linear-gradient(90deg, #21CBF3 0%, #00ff88 100%)',
+                boxShadow: '0 2px 8px 0 rgba(33,203,243,0.15)',
+                '&:hover': {
+                  background: 'linear-gradient(90deg, #21CBF3 0%, #00ff88 100%)',
                     color: '#fff',
-                  },
-                }}
-              >
+                },
+              }}
+            >
                 Login to Account
-              </Button>
-              <Box sx={{ textAlign: 'center', mt: 1 }}>
+            </Button>
+            <Box sx={{ textAlign: 'center', mt: 1 }}>
                 <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
                   Don't have an account?{' '}
                   <Link to="/register" style={{ color: '#00ff88', textDecoration: 'none', fontWeight: 600 }}>
                     Sign up
                   </Link>
                 </Typography>
-              </Box>
-            </form>
-          </Paper>
-        </Container>
+            </Box>
+          </form>
+        </Paper>
+      </Container>
       </Box>
     </Box>
   );

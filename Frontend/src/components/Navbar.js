@@ -38,7 +38,7 @@ const Navbar = () => {
         <Toolbar sx={{ justifyContent: 'space-around', minHeight: '64px' }}>
           <Button
             color="inherit"
-            sx={{
+              sx={{ 
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -53,7 +53,7 @@ const Navbar = () => {
           </Button>
           <Button
             color="inherit"
-            sx={{
+                  sx={{ 
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -66,9 +66,9 @@ const Navbar = () => {
             <AssignmentIcon />
             <Typography variant="caption">Task</Typography>
           </Button>
-          <Button
-            color="inherit"
-            sx={{
+                <Button 
+                  color="inherit" 
+                  sx={{ 
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -80,9 +80,9 @@ const Navbar = () => {
           >
             <GroupIcon />
             <Typography variant="caption">Team</Typography>
-          </Button>
-          <Button
-            color="inherit"
+                </Button>
+                <Button 
+                  color="inherit" 
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -95,10 +95,10 @@ const Navbar = () => {
           >
             <DiamondIcon />
             <Typography variant="caption">VIP</Typography>
-          </Button>
-          <Button
-            color="inherit"
-            sx={{
+                </Button>
+                <Button 
+                  color="inherit" 
+                  sx={{ 
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -110,7 +110,7 @@ const Navbar = () => {
           >
             <PersonIcon />
             <Typography variant="caption">Me</Typography>
-          </Button>
+                </Button>
         </Toolbar>
       </Container>
     </AppBar>
