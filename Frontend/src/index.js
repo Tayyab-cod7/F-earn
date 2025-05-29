@@ -1,6 +1,7 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './app';
+import { AuthProvider } from './contexts/AuthContext';
 
 // Suppress React DevTools warning
 const originalConsoleError = console.error;
@@ -18,9 +19,11 @@ console.warn = (...args) => {
 };
 
 const container = document.getElementById('root');
-const root = createRoot(container);
+const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 ); 
