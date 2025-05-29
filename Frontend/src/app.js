@@ -122,10 +122,6 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><Me /></ProtectedRoute>,
       },
       {
-        path: 'admin-dashboard',
-        element: <ProtectedRoute><AdminDashboard /></ProtectedRoute>,
-      },
-      {
         path: 'recharge',
         element: <ProtectedRoute><Recharge /></ProtectedRoute>,
       },
@@ -134,6 +130,10 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><Withdraw /></ProtectedRoute>,
       },
     ],
+  },
+  {
+    path: 'admin-dashboard',
+    element: <ProtectedRoute><AdminDashboard /></ProtectedRoute>,
   },
   {
     path: 'login',

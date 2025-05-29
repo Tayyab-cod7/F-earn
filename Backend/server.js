@@ -3,12 +3,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const http = require('http');
+const socketIo = require('socket.io');
 
 // Load environment variables
 dotenv.config();
 
 // Create Express app
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 
 // Middleware
 app.use(cors({
@@ -44,6 +53,24 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 
+// Socket.IO connection handling
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  
+  // Store user ID with socket
+  socket.on('register', (userId) => {
+    socket.userId = userId;
+    console.log(`User ${userId} registered with socket`);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
+
+// Make io accessible to routes
+app.set('io', io);
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err.stack);
@@ -60,10 +87,9 @@ app.use((req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Test the server at: http://localhost:${PORT}/api/test`);
+server.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
+  console.log(`Test the server at: http://localhost:${process.env.PORT || 5000}/api/test`);
 });
 
 // Handle server errors

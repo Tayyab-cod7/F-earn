@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Paper, Grid, TextField, IconButton, Tooltip, Avatar, Stack, Button } from '@mui/material';
+import { Box, Typography, Paper, Grid, TextField, IconButton, Tooltip, Avatar, Stack } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ShareIcon from '@mui/icons-material/Share';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 const Team = () => {
   const [referralCode, setReferralCode] = useState('');
@@ -58,114 +56,6 @@ const Team = () => {
         </Typography>
       </Box>
 
-      {/* Referral Levels Section */}
-      <Box sx={{ maxWidth: 900, mx: 'auto', mb: 4 }}>
-        <Typography variant="h5" sx={{ color: '#00ff88', fontWeight: 700, mb: 2 }}>
-          Referral Levels
-        </Typography>
-        <Grid container spacing={2}>
-          {/* Level 1 */}
-          <Grid item xs={12} sm={4}>
-            <Paper sx={{
-              p: 2,
-              borderRadius: 4,
-              background: 'linear-gradient(135deg, #232526 0%, #00ff88 100%)',
-              boxShadow: '0 2px 12px 0 rgba(0,255,136,0.10)',
-              color: '#fff',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              minHeight: 220,
-            }}>
-              <EmojiEventsIcon sx={{ fontSize: 40, color: '#00ff88', mb: 1 }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>Level 1</Typography>
-              <Typography sx={{ fontSize: 15, mb: 0.5 }}>Register/Valid: <b>0/0</b></Typography>
-              <Typography sx={{ fontSize: 15, mb: 0.5 }}>Commission: <b>13%</b></Typography>
-              <Typography sx={{ fontSize: 15, mb: 1 }}>Total Income: <b>0</b></Typography>
-              <Button variant="contained" size="small" sx={{
-                background: 'rgba(0,255,136,0.15)',
-                color: '#00ff88',
-                fontWeight: 700,
-                borderRadius: 2,
-                boxShadow: 'none',
-                '&:hover': {
-                  background: '#00ff88',
-                  color: '#222',
-                },
-                mt: 'auto',
-              }}>Details</Button>
-            </Paper>
-          </Grid>
-          {/* Level 2 */}
-          <Grid item xs={12} sm={4}>
-            <Paper sx={{
-              p: 2,
-              borderRadius: 4,
-              background: 'linear-gradient(135deg, #232526 0%, #2196F3 100%)',
-              boxShadow: '0 2px 12px 0 rgba(33,150,243,0.10)',
-              color: '#fff',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              minHeight: 220,
-            }}>
-              <MilitaryTechIcon sx={{ fontSize: 40, color: '#2196F3', mb: 1 }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>Level 2</Typography>
-              <Typography sx={{ fontSize: 15, mb: 0.5 }}>Register/Valid: <b>0/0</b></Typography>
-              <Typography sx={{ fontSize: 15, mb: 0.5 }}>Commission: <b>4%</b></Typography>
-              <Typography sx={{ fontSize: 15, mb: 1 }}>Total Income: <b>0</b></Typography>
-              <Button variant="contained" size="small" sx={{
-                background: 'rgba(33,150,243,0.15)',
-                color: '#2196F3',
-                fontWeight: 700,
-                borderRadius: 2,
-                boxShadow: 'none',
-                '&:hover': {
-                  background: '#2196F3',
-                  color: '#fff',
-                },
-                mt: 'auto',
-              }}>Details</Button>
-            </Paper>
-          </Grid>
-          {/* Level 3 */}
-          <Grid item xs={12} sm={4}>
-            <Paper sx={{
-              p: 2,
-              borderRadius: 4,
-              background: 'linear-gradient(135deg, #232526 0%, #ff4081 100%)',
-              boxShadow: '0 2px 12px 0 rgba(255,64,129,0.10)',
-              color: '#fff',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              minHeight: 220,
-            }}>
-              <WorkspacePremiumIcon sx={{ fontSize: 40, color: '#ff4081', mb: 1 }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>Level 3</Typography>
-              <Typography sx={{ fontSize: 15, mb: 0.5 }}>Register/Valid: <b>0/0</b></Typography>
-              <Typography sx={{ fontSize: 15, mb: 0.5 }}>Commission: <b>1%</b></Typography>
-              <Typography sx={{ fontSize: 15, mb: 1 }}>Total Income: <b>0</b></Typography>
-              <Button variant="contained" size="small" sx={{
-                background: 'rgba(255,64,129,0.15)',
-                color: '#ff4081',
-                fontWeight: 700,
-                borderRadius: 2,
-                boxShadow: 'none',
-                '&:hover': {
-                  background: '#ff4081',
-                  color: '#fff',
-                },
-                mt: 'auto',
-              }}>Details</Button>
-            </Paper>
-          </Grid>
-        </Grid>
-      </Box>
-
       {/* Referral Code Card */}
       <Paper elevation={6} sx={{
         maxWidth: 900,
@@ -175,25 +65,65 @@ const Team = () => {
         display: 'flex',
         alignItems: 'center',
         borderRadius: 4,
-        background: 'rgba(0,255,136,0.10)',
+        background: 'linear-gradient(135deg, rgba(0,255,136,0.15) 0%, rgba(33,150,243,0.15) 100%)',
         gap: 2,
         flexWrap: 'wrap',
+        border: '1px solid rgba(0,255,136,0.2)',
       }}>
-        <Typography sx={{ fontWeight: 700, color: '#fff', fontSize: 18, minWidth: 120 }}>
-          Your Code:
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 120 }}>
+          <EmojiEventsIcon sx={{ color: '#00ff88' }} />
+          <Typography sx={{ fontWeight: 700, color: '#fff', fontSize: 18 }}>
+            Your Code:
+          </Typography>
+        </Box>
         <TextField
           value={referralCode}
           InputProps={{ readOnly: true }}
-          sx={{ flex: 1, background: 'rgba(255,255,255,0.04)', borderRadius: 2, input: { color: '#00ff88', fontWeight: 700, fontSize: 20 } }}
+          sx={{ 
+            flex: 1, 
+            background: 'rgba(255,255,255,0.04)', 
+            borderRadius: 2, 
+            input: { 
+              color: '#00ff88', 
+              fontWeight: 700, 
+              fontSize: 20,
+              textAlign: 'center',
+              letterSpacing: '0.2em'
+            } 
+          }}
           variant="outlined"
           size="medium"
         />
-        <Tooltip title={copyMsg} arrow>
-          <IconButton onClick={() => handleCopy(referralCode, false)} sx={{ color: '#00ff88', ml: 1, fontSize: 28 }}>
-            <ContentCopyIcon fontSize="inherit" />
-          </IconButton>
-        </Tooltip>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <Tooltip title={copyMsg} arrow>
+            <IconButton 
+              onClick={() => handleCopy(referralCode, false)} 
+              sx={{ 
+                color: '#00ff88', 
+                background: 'rgba(0,255,136,0.1)',
+                '&:hover': {
+                  background: 'rgba(0,255,136,0.2)',
+                }
+              }}
+            >
+              <ContentCopyIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Share Code" arrow>
+            <IconButton 
+              onClick={() => handleCopy(referralLink, true)} 
+              sx={{ 
+                color: '#2196F3', 
+                background: 'rgba(33,150,243,0.1)',
+                '&:hover': {
+                  background: 'rgba(33,150,243,0.2)',
+                }
+              }}
+            >
+              <ShareIcon />
+            </IconButton>
+          </Tooltip>
+        </Box>
       </Paper>
 
       {/* Share Section */}

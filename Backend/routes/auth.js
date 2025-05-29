@@ -147,27 +147,127 @@ router.get('/all-users', async (req, res) => {
   }
 });
 
-// Delete a single user by ID (except admin)
+// Delete a single user by ID (except admin) - Enhanced for data deletion and logout effect
 router.delete('/user/:id', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
-    if (user.phoneNumber === '03151251123') {
+    const userIdToDelete = req.params.id;
+    const io = req.app.get('io'); // Get Socket.IO instance
+
+    const userToDelete = await User.findById(userIdToDelete);
+    if (!userToDelete) return res.status(404).json({ message: 'User not found' });
+
+    // Prevent deleting the admin user
+    if (userToDelete.phoneNumber === '03151251123') {
       return res.status(403).json({ message: 'Cannot delete admin user' });
     }
-    await User.findByIdAndDelete(req.params.id);
+
+    // --- Start: Comprehensive Data Deletion for a single user ---
+    
+    // 1. Remove this user as a referrer from other users' referredBy field
+    await User.updateMany(
+      { referredBy: userIdToDelete },
+      { $unset: { referredBy: 1 }, $inc: { referralCount: -1 } }
+    );
+
+    // 2. Clear the user's investments array
+    await User.findByIdAndUpdate(userIdToDelete, {
+      $set: { investments: [] }
+    });
+
+    // 3. Reset the user's balance
+    await User.findByIdAndUpdate(userIdToDelete, {
+      $set: { balance: 0 }
+    });
+
+    // 4. Clear referral count
+    await User.findByIdAndUpdate(userIdToDelete, {
+      $set: { referralCount: 0 }
+    });
+
+    // 5. Remove referral code
+    await User.findByIdAndUpdate(userIdToDelete, {
+      $unset: { referralCode: 1 }
+    });
+
+    // 6. Finally, delete the user document itself
+    await User.findByIdAndDelete(userIdToDelete);
+
+    // --- End: Comprehensive Data Deletion ---
+
+    // --- Start: Session/Token Invalidation ---
+    // Emit socket event to force logout
+    io.emit(`user_deleted_${userIdToDelete}`, { message: 'Your account has been deleted' });
+    console.log(`User ID ${userIdToDelete} deleted. Socket event emitted for immediate logout.`);
+    // --- End: Session/Token Invalidation ---
+
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
+    console.error('Error deleting single user:', error);
     res.status(500).json({ message: 'Error deleting user', error: error.message });
   }
 });
 
-// Delete all users except admin
+// Delete all users except admin - Enhanced for comprehensive data deletion
 router.delete('/users', async (req, res) => {
   try {
-    await User.deleteMany({ phoneNumber: { $ne: '03151251123' } });
-    res.json({ message: 'All users (except admin) deleted successfully' });
+    const io = req.app.get('io'); // Get Socket.IO instance
+    
+    // Find all non-admin users
+    const usersToDelete = await User.find({ phoneNumber: { $ne: '03151251123' } });
+    const userIdsToDelete = usersToDelete.map(user => user._id);
+
+    if (userIdsToDelete.length === 0) {
+      return res.json({ message: 'No non-admin users to delete' });
+    }
+
+    // --- Start: Comprehensive Data Deletion for multiple users ---
+    
+    // 1. Remove all deleted users as referrers from other users' referredBy field
+    await User.updateMany(
+      { referredBy: { $in: userIdsToDelete } },
+      { $unset: { referredBy: 1 }, $inc: { referralCount: -1 } }
+    );
+
+    // 2. Clear investments for all users to be deleted
+    await User.updateMany(
+      { _id: { $in: userIdsToDelete } },
+      { $set: { investments: [] } }
+    );
+
+    // 3. Reset balances for all users to be deleted
+    await User.updateMany(
+      { _id: { $in: userIdsToDelete } },
+      { $set: { balance: 0 } }
+    );
+
+    // 4. Clear referral counts
+    await User.updateMany(
+      { _id: { $in: userIdsToDelete } },
+      { $set: { referralCount: 0 } }
+    );
+
+    // 5. Remove referral codes
+    await User.updateMany(
+      { _id: { $in: userIdsToDelete } },
+      { $unset: { referralCode: 1 } }
+    );
+
+    // 6. Finally, delete all non-admin user documents
+    await User.deleteMany({ _id: { $in: userIdsToDelete } });
+
+    // --- End: Comprehensive Data Deletion ---
+
+    // --- Start: Session/Token Invalidation ---
+    // Emit socket events for all deleted users
+    userIdsToDelete.forEach(userId => {
+      io.emit(`user_deleted_${userId}`, { message: 'Your account has been deleted' });
+    });
+    console.log(`${userIdsToDelete.length} users deleted. Socket events emitted for immediate logout.`);
+    // --- End: Session/Token Invalidation ---
+
+    res.json({ message: `Successfully deleted ${userIdsToDelete.length} users.` });
   } catch (error) {
+    console.error('Error deleting all non-admin users:', error);
     res.status(500).json({ message: 'Error deleting users', error: error.message });
   }
 });

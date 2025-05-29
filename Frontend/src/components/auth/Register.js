@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import {
   Container,
   Paper,
@@ -24,12 +24,17 @@ import DialogActions from '@mui/material/DialogActions';
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const referralCodeFromUrl = queryParams.get('ref') || '';
+
   const [formData, setFormData] = useState({
     username: '',
     phoneNumber: '',
     email: '',
     password: '',
-    referralCode: ''
+    referralCode: referralCodeFromUrl
   });
   const [error, setError] = useState('');
   const [usernameError, setUsernameError] = useState('');
@@ -206,9 +211,9 @@ const Register = () => {
   return (
     <Box sx={{
       minHeight: '100vh',
-      width: '100vw',
-      background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
-      display: 'flex',
+        width: '100vw',
+        background: 'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)',
+        display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
@@ -230,15 +235,15 @@ const Register = () => {
         overflowX: 'hidden'
       }}>
         <Container maxWidth={false} disableGutters sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Paper
-            elevation={8}
-            sx={{
+        <Paper
+          elevation={8}
+          sx={{
               p: { xs: 1.5, sm: 2.5, md: 3 },
               width: { xs: '95vw', sm: '450px', md: '500px' },
               maxWidth: '98vw',
               borderRadius: 4,
-              background: 'rgba(30, 30, 30, 0.85)',
-              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            background: 'rgba(30, 30, 30, 0.85)',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
               mt: { xs: 2, sm: 3 },
               mb: { xs: 2, sm: 3 },
               display: 'flex',
@@ -377,7 +382,7 @@ const Register = () => {
                   </Typography>
                 }
                 sx={{ mb: 1 }}
-              />
+            />
             <Button
               type="submit"
               fullWidth
