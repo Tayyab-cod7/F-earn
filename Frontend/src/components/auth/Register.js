@@ -18,6 +18,10 @@ import config from '../../config';
 import AuthNavbar from '../AuthNavbar';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -36,6 +40,8 @@ const Register = () => {
   const [referralCodeError, setReferralCodeError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+  const [newReferralCode, setNewReferralCode] = useState('');
 
   const validateUsername = (username) => {
     if (!username) {
@@ -182,13 +188,18 @@ const Register = () => {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        navigate('/home');
+        setNewReferralCode(response.data.user.referralCode);
+        setSuccessDialogOpen(true);
       } else {
         setError('Registration successful but no token received');
       }
     } catch (err) {
       console.error('Registration error:', err);
-      setError(err.response?.data?.message || 'An error occurred during registration. Please try again.');
+      if (err.response?.data?.message === 'Invalid referral code') {
+        setReferralCodeError('Referral code is invalid. Please check and try again.');
+      } else {
+        setError(err.response?.data?.message || 'An error occurred during registration. Please try again.');
+      }
     }
   };
 
@@ -394,6 +405,20 @@ const Register = () => {
           </Paper>
         </Container>
       </Box>
+      {/* Success Dialog */}
+      <Dialog open={successDialogOpen} onClose={() => { setSuccessDialogOpen(false); navigate('/home'); }}>
+        <DialogTitle>Registration Successful!</DialogTitle>
+        <DialogContent>
+          <Typography>Your account has been created.</Typography>
+          <Typography sx={{ mt: 2, fontWeight: 700, color: '#00ff88' }}>Your Referral Code: {newReferralCode}</Typography>
+          <Typography sx={{ mt: 1, color: '#888' }}>Share this code with others to earn rewards!</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" onClick={() => { setSuccessDialogOpen(false); navigate('/home'); }}>
+            Continue
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

@@ -9,11 +9,9 @@ import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 const Team = () => {
   const [referralCode, setReferralCode] = useState('');
   const [referralLink, setReferralLink] = useState('');
-  const [referralCount, setReferralCount] = useState(3);
-  const [referralEarnings, setReferralEarnings] = useState(200);
   const [copyMsg, setCopyMsg] = useState('Copy');
   const [copyMsgLink, setCopyMsgLink] = useState('Copy');
-  const [team, setTeam] = useState([]);
+  const [team] = useState([]);
 
   useEffect(() => {
     // Simulate fetching referral data from backend or localStorage
@@ -230,26 +228,6 @@ const Team = () => {
 
       {/* Stats Section */}
       <Grid container spacing={2} sx={{ maxWidth: 900, mx: 'auto', mb: 3 }}>
-        <Grid item xs={12} sm={4}>
-          <Paper sx={{ p: 2, borderRadius: 3, background: 'rgba(255,255,255,0.04)', textAlign: 'center' }}>
-            <Typography variant="h4" sx={{ color: '#00ff88', fontWeight: 700 }}>
-              {referralCount}
-            </Typography>
-            <Typography variant="subtitle2" sx={{ color: '#bdbdbd', fontWeight: 600 }}>
-              Total Referrals
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Paper sx={{ p: 2, borderRadius: 3, background: 'rgba(255,255,255,0.04)', textAlign: 'center' }}>
-            <Typography variant="h4" sx={{ color: '#00ff88', fontWeight: 700 }}>
-              RS {referralEarnings}
-            </Typography>
-            <Typography variant="subtitle2" sx={{ color: '#bdbdbd', fontWeight: 600 }}>
-              Referral Earnings
-            </Typography>
-          </Paper>
-        </Grid>
         <Grid item xs={12} sm={4}>
           <Paper sx={{ p: 2, borderRadius: 3, background: 'rgba(255,255,255,0.04)', textAlign: 'center' }}>
             <Typography variant="h4" sx={{ color: '#00ff88', fontWeight: 700 }}>
