@@ -1,30 +1,18 @@
 import React from 'react';
 import { Box, Typography, Container, Grid, Card, CardContent } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
-import SettingsIcon from '@mui/icons-material/Settings';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-// Import icons for Recharge and Withdraw
-// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'; // Removed icon import
-// import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'; // Removed icon import
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'; // Import wallet icon
-import SavingsIcon from '@mui/icons-material/Savings'; // Import savings icon for Withdraw
-// Import icons for carousel navigation
-// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'; // Remove unused icons
-// import ChevronRightIcon from '@mui/icons-material/ChevronRight'; // Remove unused icons
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import SavingsIcon from '@mui/icons-material/Savings';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/navigation'; // Import navigation styles
-// import 'swiper/css/pagination'; // Uncomment if you want pagination dots
-// import 'swiper/css/effect-fade'; // Uncomment if you want fade effect
+import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate(); // Initialize useNavigate

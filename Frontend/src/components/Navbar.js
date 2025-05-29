@@ -5,8 +5,7 @@ import {
   Toolbar,
   Typography,
   Button,
-  Container,
-  Box
+  Container
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import AssignmentIcon from '@mui/icons-material/Assignment';
